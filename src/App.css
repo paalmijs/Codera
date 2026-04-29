@@ -1,0 +1,417 @@
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  background: #f6f7fb;
+  color: #182033;
+}
+
+.sidebar {
+  min-height: 100vh;
+  border-right: 1px solid #dde3ee;
+  background: #ffffff;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: #182033;
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.brand strong,
+.brand span {
+  display: block;
+}
+
+.brand strong {
+  font-size: 20px;
+}
+
+.brand span {
+  margin-top: 2px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.nav-list {
+  display: grid;
+  gap: 8px;
+}
+
+.nav-item {
+  color: #4b5563;
+  text-decoration: none;
+  padding: 12px 14px;
+  border-radius: 7px;
+  font-weight: 700;
+}
+
+.nav-item.active,
+.nav-item:hover {
+  background: #edf6f2;
+  color: #16624f;
+}
+
+.streak-panel {
+  margin-top: auto;
+  border: 1px solid #dde3ee;
+  border-radius: 8px;
+  padding: 18px;
+  background: #fbfcff;
+}
+
+.metric-label,
+.eyebrow {
+  margin: 0;
+  color: #667085;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.streak-panel strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 26px;
+  color: #182033;
+}
+
+.mini-calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  margin-top: 16px;
+}
+
+.mini-calendar span {
+  height: 28px;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  background: #edf0f6;
+  color: #667085;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.mini-calendar .filled {
+  background: #23a47f;
+  color: #ffffff;
+}
+
+.workspace {
+  padding: 34px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 26px;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 760px;
+  margin-bottom: 0;
+  font-size: 44px;
+  line-height: 1.04;
+}
+
+h2 {
+  margin-bottom: 0;
+  font-size: 24px;
+}
+
+h3 {
+  margin-bottom: 7px;
+  font-size: 17px;
+}
+
+.primary-action {
+  border: 0;
+  border-radius: 7px;
+  background: #182033;
+  color: #ffffff;
+  padding: 12px 16px;
+  min-height: 44px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.primary-action:hover {
+  background: #263047;
+}
+
+.wide {
+  width: 100%;
+}
+
+.language-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.language {
+  border: 1px solid #dde3ee;
+  border-left: 5px solid var(--language-accent);
+  border-radius: 8px;
+  background: #ffffff;
+  min-height: 82px;
+  padding: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.language span,
+.language small {
+  display: block;
+}
+
+.language span {
+  font-size: 18px;
+  font-weight: 800;
+  color: #182033;
+}
+
+.language small {
+  margin-top: 6px;
+  color: #667085;
+  font-weight: 700;
+}
+
+.language.active {
+  box-shadow: 0 10px 24px rgba(32, 42, 67, 0.1);
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+  gap: 18px;
+}
+
+.learning-path,
+.challenge-panel,
+.project-row,
+.progress-band {
+  border: 1px solid #dde3ee;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.learning-path,
+.challenge-panel {
+  padding: 22px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.pill {
+  border-radius: 999px;
+  background: #edf6f2;
+  color: #16624f;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.lesson-list {
+  display: grid;
+  gap: 12px;
+}
+
+.lesson {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 15px;
+  border: 1px solid #e6ebf2;
+  border-radius: 8px;
+  background: #fbfcff;
+}
+
+.lesson.active {
+  border-color: #23a47f;
+  background: #f3fbf8;
+}
+
+.lesson.locked {
+  opacity: 0.62;
+}
+
+.lesson-index {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: #182033;
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.lesson p,
+.project-card p,
+.challenge-copy {
+  color: #667085;
+}
+
+.lesson-status {
+  color: #475467;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.challenge-copy {
+  line-height: 1.55;
+}
+
+.code-prompt {
+  margin: 22px 0;
+  border-radius: 8px;
+  background: #111827;
+  color: #d1fae5;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+  align-items: center;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.code-prompt input {
+  min-width: 0;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  background: #1f2937;
+  color: #ffffff;
+  padding: 10px;
+  font: inherit;
+}
+
+.project-row {
+  margin-top: 18px;
+  padding: 22px;
+}
+
+.project-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.project-card {
+  border: 1px solid #e6ebf2;
+  border-radius: 8px;
+  padding: 18px;
+  background: #fbfcff;
+}
+
+.project-number {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #23a47f;
+  font-weight: 900;
+}
+
+.progress-band {
+  margin-top: 18px;
+  padding: 22px;
+  display: grid;
+  grid-template-columns: minmax(220px, 0.4fr) minmax(0, 1fr);
+  gap: 22px;
+  align-items: center;
+}
+
+.progress-track {
+  height: 14px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #e6ebf2;
+}
+
+.progress-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #23a47f, #2f80ed);
+}
+
+@media (max-width: 960px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    min-height: auto;
+    border-right: 0;
+    border-bottom: 1px solid #dde3ee;
+  }
+
+  .content-grid,
+  .project-list,
+  .progress-band {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .workspace,
+  .sidebar {
+    padding: 20px;
+  }
+
+  .topbar {
+    display: grid;
+  }
+
+  h1 {
+    font-size: 34px;
+  }
+
+  .language-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .lesson {
+    grid-template-columns: 38px 1fr;
+  }
+
+  .lesson-status {
+    grid-column: 2;
+  }
+}
