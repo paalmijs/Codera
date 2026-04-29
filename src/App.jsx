@@ -59,13 +59,25 @@ function App() {
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0])
   const [answer, setAnswer] = useState('')
   const [xp, setXp] = useState(340)
+  const [feedback, setFeedback] = useState('')
+
 
   const completion = useMemo(() => Math.round((xp / 500) * 100), [xp])
 
   function submitChallenge() {
-    if (!answer.trim()) return
-    setXp((currentXp) => Math.min(currentXp + 25, 500))
-    setAnswer('')
+    const cleanAnswer = answer.trim()
+    
+    if (!cleanAnswer) {
+      setFeedback('Write your answer first!')
+      return
+    }
+
+    if (cleanAnswer === '>= 100:') {
+      setXp((prevXp) => prevXp + 25)
+      setFeedback('Correct! You earned 25 XP.')
+    } else {
+      setFeedback('Not quite right. Try again!')
+    }
   }
 
   return (
@@ -179,7 +191,7 @@ function App() {
                 value={answer}
               />
             </div>
-
+            {feedback && <p className="feedback-message">{feedback}</p>}
             <button className="primary-action wide" onClick={submitChallenge} type="button">
               Check answer
             </button>
