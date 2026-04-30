@@ -1,5 +1,8 @@
 import { useMemo, useState } from 'react'
 import coderaLogo from './assets/codera-logo.png'
+import pythonIcon from './assets/python.png'
+import javascriptIcon from './assets/javascript.png'
+import htmlCssIcon from './assets/html.png'
 import './App.css'
 
 const languages = [
@@ -7,18 +10,21 @@ const languages = [
     name: 'Python',
     level: 'Beginner friendly',
     accent: '#2f80ed',
+    icon: pythonIcon,
     units: ['Variables', 'Conditions', 'Loops', 'Functions'],
   },
   {
     name: 'JavaScript',
     level: 'Web apps',
     accent: '#f2b705',
+    icon: javascriptIcon,
     units: ['DOM basics', 'Events', 'Arrays', 'APIs'],
   },
   {
     name: 'HTML & CSS',
     level: 'Design basics',
     accent: '#eb5757',
+    icon: htmlCssIcon,
     units: ['Structure', 'Selectors', 'Layouts', 'Responsive UI'],
   },
 ]
@@ -137,8 +143,11 @@ function App() {
               style={{ '--language-accent': language.accent }}
               type="button"
             >
+            <img className="language-icon" src={language.icon} alt="" />
+            <div>
               <span>{language.name}</span>
               <small>{language.level}</small>
+            </div>
             </button>
           ))}
         </section>
