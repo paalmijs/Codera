@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import coderaLogo from './assets/codera-logo.png'
 import './App.css'
 
 const languages = [
@@ -84,7 +85,7 @@ function App() {
     <main className="app-shell">
       <aside className="sidebar" aria-label="Codera navigation">
         <div className="brand">
-          <span className="brand-mark">C</span>
+          <img className="brand-logo" src={coderaLogo} alt="Codera logo" />
           <div>
             <strong>Codera</strong>
             <span>Build your way into code</span>

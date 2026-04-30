@@ -33,6 +33,13 @@
   font-weight: 800;
 }
 
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
 .brand strong,
 .brand span {
   display: block;
