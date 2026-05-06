@@ -5,11 +5,18 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:server": "node --watch server/index.js",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@better-auth/mongo-adapter": "^1.6.9",
+    "better-auth": "^1.6.9",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^4.22.1",
+    "mongodb": "^7.2.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5"
   },

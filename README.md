@@ -13,6 +13,14 @@ npm run dev
 
 Open the local URL shown by Vite.
 
+For Better Auth, run the API server in a second terminal:
+
+```bash
+npm run dev:server
+```
+
+Copy `.env.example` to `.env` and set `MONGODB_URI` before creating accounts.
+
 ## Current prototype
 
 - Language selection for Python, JavaScript, and HTML & CSS
@@ -20,3 +28,4 @@ Open the local URL shown by Vite.
 - Interactive challenge card
 - Project studio preview
 - XP and streak progress UI
+- Better Auth email/password screen with a MongoDB-backed API server

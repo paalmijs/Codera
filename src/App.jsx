@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react'
+import { authClient } from './lib/auth-client'
 import ChallengePanel from './components/ChallengePanel'
 import LanguageCard from './components/LanguageCard'
 import LessonCard from './components/LessonCard'
+import LoginScreen from './components/LoginScreen'
 import ProgressBand from './components/ProgressBand'
 import ProjectCard from './components/ProjectCard'
 import Sidebar from './components/Sidebar'
@@ -9,6 +11,11 @@ import { languages, lessons, projects } from './data'
 import './App.css'
 
 function App() {
+  const {
+    data: session,
+    isPending: isSessionPending,
+    refetch: refetchSession,
+  } = authClient.useSession()
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0])
   const [answer, setAnswer] = useState('')
   const [xp, setXp] = useState(340)
@@ -33,6 +40,26 @@ function App() {
     }
   }
 
+  async function handleLogout() {
+    await authClient.signOut()
+    refetchSession()
+  }
+
+  if (isSessionPending) {
+    return (
+      <main className="login-page">
+        <section className="login-panel">
+          <p className="eyebrow">Loading</p>
+          <h1>Checking your session.</h1>
+        </section>
+      </main>
+    )
+  }
+
+  if (!session) {
+    return <LoginScreen onAuthenticated={refetchSession} />
+  }
+
   return (
     <main className="app-shell">
       <Sidebar />
@@ -42,10 +69,16 @@ function App() {
           <div>
             <p className="eyebrow">Today&apos;s path</p>
             <h1>Learn fundamentals, then ship real projects.</h1>
+            <p className="welcome-message">Welcome back, {session.user.name}</p>
           </div>
-          <button className="primary-action" type="button">
-            Continue lesson
-          </button>
+          <div className="topbar-actions">
+            <button className="primary-action" type="button">
+              Continue lesson
+            </button>
+            <button className="secondary-action" onClick={handleLogout} type="button">
+              Log out
+            </button>
+          </div>
         </header>
 
         <section className="language-strip" aria-label="Choose language">
