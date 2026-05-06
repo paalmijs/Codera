@@ -1,66 +1,12 @@
 import { useMemo, useState } from 'react'
-import coderaLogo from './assets/codera-logo.png'
-import pythonIcon from './assets/python.png'
-import javascriptIcon from './assets/javascript.png'
-import htmlCssIcon from './assets/html.png'
+import ChallengePanel from './components/ChallengePanel'
+import LanguageCard from './components/LanguageCard'
+import LessonCard from './components/LessonCard'
+import ProgressBand from './components/ProgressBand'
+import ProjectCard from './components/ProjectCard'
+import Sidebar from './components/Sidebar'
+import { languages, lessons, projects } from './data'
 import './App.css'
-
-const languages = [
-  {
-    name: 'Python',
-    level: 'Beginner friendly',
-    accent: '#2f80ed',
-    icon: pythonIcon,
-    units: ['Variables', 'Conditions', 'Loops', 'Functions'],
-  },
-  {
-    name: 'JavaScript',
-    level: 'Web apps',
-    accent: '#f2b705',
-    icon: javascriptIcon,
-    units: ['DOM basics', 'Events', 'Arrays', 'APIs'],
-  },
-  {
-    name: 'HTML & CSS',
-    level: 'Design basics',
-    accent: '#eb5757',
-    icon: htmlCssIcon,
-    units: ['Structure', 'Selectors', 'Layouts', 'Responsive UI'],
-  },
-]
-
-const lessons = [
-  {
-    title: 'Variables',
-    kind: 'Lesson',
-    minutes: 8,
-    status: 'done',
-  },
-  {
-    title: 'If / else logic',
-    kind: 'Challenge',
-    minutes: 12,
-    status: 'active',
-  },
-  {
-    title: 'Loops',
-    kind: 'Practice',
-    minutes: 10,
-    status: 'locked',
-  },
-  {
-    title: 'Build: Score tracker',
-    kind: 'Project',
-    minutes: 35,
-    status: 'locked',
-  },
-]
-
-const projects = [
-  'Command line quiz game',
-  'Personal budget calculator',
-  'Habit tracker app',
-]
 
 function App() {
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0])
@@ -68,20 +14,20 @@ function App() {
   const [xp, setXp] = useState(340)
   const [feedback, setFeedback] = useState('')
 
-
   const completion = useMemo(() => Math.round((xp / 500) * 100), [xp])
 
   function submitChallenge() {
     const cleanAnswer = answer.trim()
-    
+
     if (!cleanAnswer) {
       setFeedback('Write your answer first!')
       return
     }
 
     if (cleanAnswer === '>= 100:') {
-      setXp((prevXp) => prevXp + 25)
+      setXp((prevXp) => Math.min(prevXp + 25, 500))
       setFeedback('Correct! You earned 25 XP.')
+      setAnswer('')
     } else {
       setFeedback('Not quite right. Try again!')
     }
@@ -89,39 +35,7 @@ function App() {
 
   return (
     <main className="app-shell">
-      <aside className="sidebar" aria-label="Codera navigation">
-        <div className="brand">
-          <img className="brand-logo" src={coderaLogo} alt="Codera logo" />
-          <div>
-            <strong>Codera</strong>
-            <span>Build your way into code</span>
-          </div>
-        </div>
-
-        <nav className="nav-list" aria-label="Main sections">
-          <a className="nav-item active" href="#learn">
-            Learn
-          </a>
-          <a className="nav-item" href="#projects">
-            Projects
-          </a>
-          <a className="nav-item" href="#progress">
-            Progress
-          </a>
-        </nav>
-
-        <div className="streak-panel">
-          <span className="metric-label">Daily streak</span>
-          <strong>7 days</strong>
-          <div className="mini-calendar" aria-label="Weekly streak">
-            {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, index) => (
-              <span className={index < 5 ? 'filled' : ''} key={`${day}-${index}`}>
-                {day}
-              </span>
-            ))}
-          </div>
-        </div>
-      </aside>
+      <Sidebar />
 
       <section className="workspace">
         <header className="topbar">
@@ -136,19 +50,12 @@ function App() {
 
         <section className="language-strip" aria-label="Choose language">
           {languages.map((language) => (
-            <button
-              className={language.name === selectedLanguage.name ? 'language active' : 'language'}
+            <LanguageCard
               key={language.name}
-              onClick={() => setSelectedLanguage(language)}
-              style={{ '--language-accent': language.accent }}
-              type="button"
-            >
-            <img className="language-icon" src={language.icon} alt="" />
-            <div>
-              <span>{language.name}</span>
-              <small>{language.level}</small>
-            </div>
-            </button>
+              language={language}
+              isActive={language.name === selectedLanguage.name}
+              onSelect={setSelectedLanguage}
+            />
           ))}
         </section>
 
@@ -164,48 +71,17 @@ function App() {
 
             <div className="lesson-list">
               {lessons.map((lesson, index) => (
-                <article className={`lesson ${lesson.status}`} key={lesson.title}>
-                  <span className="lesson-index">{index + 1}</span>
-                  <div>
-                    <h3>{lesson.title}</h3>
-                    <p>
-                      {lesson.kind} · {lesson.minutes} min
-                    </p>
-                  </div>
-                  <span className="lesson-status">{lesson.status}</span>
-                </article>
+                <LessonCard key={lesson.title} lesson={lesson} index={index} />
               ))}
             </div>
           </section>
 
-          <section className="challenge-panel">
-            <div className="section-heading">
-              <div>
-                <p className="eyebrow">Active challenge</p>
-                <h2>If / else logic</h2>
-              </div>
-              <span className="pill">+25 XP</span>
-            </div>
-
-            <p className="challenge-copy">
-              Write the condition that checks if a learner has at least 100 XP and can
-              unlock the next lesson.
-            </p>
-
-            <div className="code-prompt">
-              <span>if learner_xp</span>
-              <input
-                aria-label="Condition answer"
-                onChange={(event) => setAnswer(event.target.value)}
-                placeholder=">= 100:"
-                value={answer}
-              />
-            </div>
-            {feedback && <p className="feedback-message">{feedback}</p>}
-            <button className="primary-action wide" onClick={submitChallenge} type="button">
-              Check answer
-            </button>
-          </section>
+          <ChallengePanel
+            answer={answer}
+            feedback={feedback}
+            onAnswerChange={setAnswer}
+            onSubmit={submitChallenge}
+          />
         </div>
 
         <section className="project-row" id="projects">
@@ -218,24 +94,12 @@ function App() {
 
           <div className="project-list">
             {projects.map((project, index) => (
-              <article className="project-card" key={project}>
-                <span className="project-number">0{index + 1}</span>
-                <h3>{project}</h3>
-                <p>Guided brief, checkpoints, mentor hints, and a final review.</p>
-              </article>
+              <ProjectCard key={project} project={project} index={index} />
             ))}
           </div>
         </section>
 
-        <section className="progress-band" id="progress">
-          <div>
-            <p className="eyebrow">Progress</p>
-            <h2>{xp} XP earned this level</h2>
-          </div>
-          <div className="progress-track" aria-label={`${completion}% progress`}>
-            <span style={{ width: `${completion}%` }} />
-          </div>
-        </section>
+        <ProgressBand completion={completion} xp={xp} />
       </section>
     </main>
   )
